@@ -1,13 +1,17 @@
-package me.rayll.transacaokafka.transacaorequest;
+package me.rayll.transacaokafka.dominio;
 
-public class Cartao {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Embeddable
+public class Cartao implements Serializable {
 
     private String id;
 
     private String email;
 
     @Deprecated
-    private Cartao(){}
+    public Cartao(){}
 
     public Cartao(String id, String email) {
         this.id = id;

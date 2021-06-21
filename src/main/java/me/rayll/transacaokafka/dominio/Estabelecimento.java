@@ -1,5 +1,8 @@
-package me.rayll.transacaokafka.transacaorequest;
+package me.rayll.transacaokafka.dominio;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Estabelecimento {
 
     private String nome;
@@ -9,7 +12,7 @@ public class Estabelecimento {
     private String endereco;
 
     @Deprecated
-    private Estabelecimento(){}
+    public Estabelecimento(){}
 
     public Estabelecimento(String nome, String cidade, String endereco) {
         this.nome = nome;

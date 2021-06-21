@@ -1,13 +1,17 @@
-package me.rayll.transacaokafka.consumerkafka;
+package me.rayll.transacaokafka.dominio.transacaomanipulacao;
 
-import me.rayll.transacaokafka.transacaorequest.Cartao;
-import me.rayll.transacaokafka.transacaorequest.Estabelecimento;
+import me.rayll.transacaokafka.dominio.Cartao;
+import me.rayll.transacaokafka.dominio.Estabelecimento;
+import me.rayll.transacaokafka.dominio.Transacao;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class TransacaoDTO {
+public class TransacaoRequest {
 
     private String id;
+
+    private BigDecimal valor;
 
     private Estabelecimento estabelecimento;
 
@@ -16,10 +20,12 @@ public class TransacaoDTO {
     private LocalDateTime efetivadaEm;
 
     @Deprecated
-    private TransacaoDTO(){}
+    private TransacaoRequest() {
+    }
 
-    public TransacaoDTO(String id, Estabelecimento estabelecimento, Cartao cartao, LocalDateTime efetivadaEm) {
+    public TransacaoRequest(String id, BigDecimal valor, Estabelecimento estabelecimento, Cartao cartao, LocalDateTime efetivadaEm) {
         this.id = id;
+        this.valor = valor;
         this.estabelecimento = estabelecimento;
         this.cartao = cartao;
         this.efetivadaEm = efetivadaEm;
@@ -57,14 +63,22 @@ public class TransacaoDTO {
         this.efetivadaEm = efetivadaEm;
     }
 
-    @Override
-    public String toString() {
-        return "TransacaoDTO{" +
-                "id='" + id + '\'' +
-                ", email='" +
-                ", estabelecimento=" + estabelecimento +
-                ", cartao=" + cartao +
-                ", efetivadaEm=" + efetivadaEm +
-                '}';
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public Transacao toModel() {
+        Transacao model = new Transacao(
+                this.id,
+                this.valor,
+                this.estabelecimento,
+                this.cartao,
+                this.efetivadaEm
+        );
+        return model;
     }
 }
